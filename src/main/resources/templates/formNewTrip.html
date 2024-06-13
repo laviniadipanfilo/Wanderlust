@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nuovo viaggio</title>
+	<link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+	<div class="sfondo">
+		<div class="content">
+		    <h2>Aggiungi un viaggio</h2>
+		    <form th:action="@{/trip}" method="POST" th:object="${trip}">
+		      <div>
+		        <span th:text="${messaggioErrore}">Errore</span>
+		      </div>
+			  <div>
+			  	<label>Nome: </label>
+			  	<span><input required type="text" th:field="${trip.name}"/></span>
+			  </div><br>
+			  
+			  <div>
+			  	<label>Location: </label>
+			  	<span><input required type="text" th:field="${trip.location}"/></span>
+			  </div><br>
+			  
+			  <div>
+			  	<label>Prezzo: </label>
+			  	<span><input required type="number" th:field="${trip.price}"/></span>
+			  </div><br>
+			  
+			  <div>
+			  	<label>Mezzo di trasporto: </label>
+			  	<span><input required type="text" th:field="${trip.transport}"/></span>
+			  </div><br>
+			  				
+			  <div>
+			  	<label>Data di partenza: </label>
+			  	<span><input required type="date" th:field="${trip.arrivalDay}"/></span>	
+			  </div><br>
+			  
+			  <div>
+			  	<label>Data di arrivo: </label>
+			  	<span><input required type="date" th:field="${trip.lastDay}"/></span>	
+			  </div><br>
+			  
+			  <div>
+			  	<label>Descrizione: </label>
+			  	<span><textarea th:field="${trip.description}" rows="4" cols="50"></textarea></span>
+			  </div>
+			  				
+<!--			  <div>-->
+<!--			  	<label>URL immagine: </label>-->
+<!--			  	<span><input type="url" th:field="${trip.urlImage}" /></span>	-->
+<!--			  </div><br>-->
+
+<!--			  </div>-->
+<!--			    <input type="file" id="avatar" name="foto" accept="image/png, image/jpeg" required>-->
+<!--			  <div>-->
+			  
+			  <div>
+			  	<button type="submit"><a class="bottone buttonNormal">Conferma</a></button><br>
+			  </div>
+			  
+		    </form>
+			
+			<form method="post" enctype="multipart/form-data" action="/uploadImage">
+				<input type="file" name="imageFile"/>
+				<input type="submit" value="upload"/>
+			</form>
+			
+		</div>
+	</div>
+  </body>
+</html>

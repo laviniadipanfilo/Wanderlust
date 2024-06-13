@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Aggiungi leader</title>
+	<link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+	<div class="sfondo">
+		<div class="content">
+		    <form th:action="@{/trip}" method="POST" th:object="${leader}">
+		      <div>
+		        <span th:text="${messaggioErrore}">Errore</span>
+		      </div>
+			  <div th:if="${trip}">
+			      <h2 th:text="${trip.name}">Viaggio</h2>
+			  		  <span><img class="foto" width="40%" th:src=${trip.urlImage} /></span></br>
+			 		  <div th:if="${trip.leader}">
+						<span>Leader: </span>
+						<span> <a th:href="@{'/leader/' + ${trip.leader.id}}"
+								  th:text="${trip.leader.name} + ' ' + ${trip.leader.surname}"></a></span>
+								  <span><img class="foto" width="10%" th:src=${trip.leader.urlImage} /></span>
+
+						<br></br>
+						<button type="button"><a class="bottone buttonNormal" th:href="@{'/addLeader' + '/' + ${trip.id}}">Modifica leader</a></button><br>
+					  </div>
+					  <div th:unless="${trip.leader}">
+						<button type="button"><a class="bottone buttonNormal" th:href="@{'/addLeader' + '/' + ${trip.id}}">Aggiungi leader</a></button><br>
+					  </div>
+			  </div>
+			  <button type="button"><a class="bottone buttonNormal" href="/">Homepage</a></button><br>
+			  <button type="button"><a class="bottone buttonNormal" th:href="@{'/trip' + '/' + ${trip.id}}">Torna al viaggio</a></button><br>
+		    </form>
+			<div th:unless="${trip}">Non esiste</div>
+		</div>
+	</div>
+  </body>
+</html>

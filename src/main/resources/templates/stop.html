@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tappa del viaggio</title>
+	<link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+	<div class="sfondo">
+		<div class="content">
+			<div th:if="${stop}">
+				<h1><span class="titolo" th:text="${stop.location}"></span></h1><br>
+				<div><strong>Durata del soggiorno qui: </strong> <span th:text="${stop.days}"></span> giorni</div>
+				<div><strong>Numero tappa: </strong> <span th:text="${stop.number}"></span>° tappa</div><br><br>
+				<span><img class="foto" width="30%" th:src=${stop.urlImage} /></span></br><br>
+
+				<div>Descrizione:</div>
+				<div><span class="testo" th:text="${stop.description}"></span></div><br>
+
+				<button type="button"><a class="bottone buttonNormal" witdh="70%" th:href="@{'/trips' + '/stop/' + ${stop.id}}">Viaggi con <span th:text="${stop.location}"></span></a></button><br>
+				<button type="button"><a class="bottone buttonNormal" href="/">Homepage</a></button><br>
+				
+			</div>
+		</div>
+	</div>
+	<div th:unless="${stop}">Non esiste</div>
+  </body>
+</html>

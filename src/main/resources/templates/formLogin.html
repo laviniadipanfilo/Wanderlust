@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Login
+	</title>
+	<link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+
+	<div class="sfondo">
+	
+		<div class="content">
+		
+			<div>
+				<h2>Login</h2>
+			</div>
+			
+			<form th:action="@{/login}" method="POST">
+				
+					<div>
+						<span>Username: </span>
+						<span><input name="username" type="text" required /></span><br>
+					</div><br>
+					
+					<div>
+						<span>Password: </span>
+						<span><input name="password" type="password" required /></span>
+					</div>
+					
+						<div>
+							<span th:if="${param.error != null}">Username o password errati</span>
+						</div>
+					
+					<div class="button-container">
+					  <button type="submit"><a class="bottone buttonNormal">LOGIN</a></button><br>
+					  <button type="button"><a class="bottone buttonNormal" href="/register">Register</a></button>
+					</div>
+					
+			</form>
+			
+		</div>
+			
+	</div>
+	
+</body>
+
+</html>

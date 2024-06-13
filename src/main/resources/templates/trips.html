@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Viaggi</title>
+	<link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+	<div class="sfondo">
+		<div class="content">
+			<img src="/images/viaggiLogo.png" class="logoViaggi" width="20%">
+		      <div th:if="${trips.isEmpty()}">Non ci sono viaggi di questo tipo nel sistema</div>
+		      <ul>
+		        <li class="card" th:each="trip : ${trips}">
+		          <a th:href="@{'/trip' + '/' + ${trip.id}}"
+		             th:text="${trip.name}"></a><br>
+				  <span><img class="foto" width="100%" th:src=${trip.urlImage} /></span>
+		        </li>
+		      </ul>
+			  <button type="button"><a class="bottone buttonNormal" href="/">Homepage</a></button><br>
+		</div>
+	</div>
+  </body>
+</html>

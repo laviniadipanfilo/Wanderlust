@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nuovo Leader</title>
+	<link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+	
+	<div class="sfondo">
+
+		<div class="content">
+	
+			<h1>Aggiungi un leader</h1>
+		    <form th:action="@{/leader}" method="POST" th:object="${leader}">
+				
+		      <div>
+		        <span th:text="${messaggioErrore}">Errore</span>
+		      </div>
+			  
+		      <div>
+				<label>Nome:</label>
+		        <span><input type="text" th:field="${leader.name}"/></span>
+		      </div><br>
+			  
+			  <div>
+			  	<label>Cognome:</label>
+			  	<span><input type="text" th:field="${leader.surname}"/></span>
+			  </div><br>
+			  
+		      <div>
+				<label>URL immagine:</label>
+		        <span><input type="text" th:field="${leader.urlImage}"/></span>
+		      </div><br>
+			  
+			  <div>
+			      <label>Nascita:</label>
+			      <span><input type="date" th:field="${leader.birthday}" rows="4" cols="50"></span>
+			  </div>
+
+		      <div>
+		        <span class="bottone"><button type="submit">Conferma</button></span>
+		      </div>
+		    </form>
+
+		</div>
+		
+	</div>
+	
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Leaders</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+  	<div class="sfondo">
+  		<div class="content">
+		    <h1>Leaders</h1>
+		    <div th:if="${leaders.isEmpty()}">Non ci sono leaders nel sistema</div>
+		    <ul>
+				<li class="card" th:each="leader : ${leaders}">
+				<a th:text="${leader.name} + ' ' + ${leader.surname}"
+				   th:href="@{'/setLeader/' + ${leader.id} + '/' + ${trip.id}}">Aggiungi</a>
+				   <span><img class="foto" width="80%" th:src=${leader.urlImage} /></span><br><br>
+		      	</li>
+		    </ul>
+  		</div>
+  	</div>
+  </body>
+</html>

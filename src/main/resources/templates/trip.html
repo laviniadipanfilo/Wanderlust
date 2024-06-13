@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Viaggio</title>
+	<link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+	<div class="sfondo">
+		<div class="content">
+			<div th:if="${trip}">
+				<h1><span class="titolo" th:text="${trip.name}"></span></h1>
+				<div><strong>Destinazione: </strong> <span th:text="${trip.location}"></span></div>
+				<div><strong>Prezzo: </strong> <span th:text="${trip.price}"></span>€</div>
+				<div><strong>Date: </strong> da <span th:text="${trip.arrivalDay}"></span> a <span th:text="${trip.lastDay}"></span></div>
+				<div><strong>Mezzo di trasporto: </strong> <span th:text="${trip.transport}"></span></div>
+				<span><img class="foto" width="40%" th:src=${trip.urlImage} /></span></br>
+
+				<div th:if="${trip.leader}">
+							<div>
+								<strong>Leader: <strong> 
+							<a class="leader" th:href="@{'/leader/' + ${trip.leader.id}}"
+						   	   th:text="${trip.leader.name} + ' ' + ${trip.leader.surname}"></a><br>
+							   <span><img class="foto" width="10%" th:src=${trip.leader.urlImage} /></span>
+							</div>
+				</div>
+				
+				<div th:if="${trip.stops}">
+					<ul>
+					<div th:if="${#lists.size(trip.stops) > 0}">
+						<div><strong>Tappe viaggio</strong></div>
+						<li class="card" th:each="stop : ${trip.stops}">
+							<a th:href="@{'/stop/' + ${stop.id}}"
+							   th:text="${stop.location}"></a>
+							<span><img class="foto" width="70%" th:src=${stop.urlImage} /></span>
+						</li>
+					</ul>
+				</div>
+				
+				<div>Descrizione:</div>
+				<div><span class="testo" th:text="${trip.description}"></span></div><br>
+
+				<button type="button"><a class="bottone buttonNormal" th:href="@{'/formAddStop' + '/' + ${trip.id}}">Aggiungi tappa/e</a></button><br>
+				<button type="button"><a class="bottone buttonNormal" th:href="@{'/updateTrip' + '/' + ${trip.id}}">Modifica</a></button><br>
+				<button type="button"><a class="bottone buttonNormal" href="/">Homepage</a></button><br>
+				<button type="button"><a class="bottone buttonNormal" href="/trips">Torna ai viaggi</a></button><br>
+				
+				</div>
+					<form th:action="@{'/deleteTrip' + '/' + ${trip.id}}" method="post">
+					<input type="hidden" name="_method" value="delete" />
+					<button type="submit"><a class="bottone buttonNormal">Elimina</a></button><br>
+<!--					<button type="button"><a class="bottone buttonNormal" th:href="@{'/deleteTrip/' + ${trip.id}}">Elimina viaggio</a></button><br>-->
+					</form>
+				</div>
+			
+			</div>
+			<div th:unless="${trip}">Non esiste</div>
+		</div>
+	</div>
+  </body>
+</html>

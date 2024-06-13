@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tappe del viaggio</title>
+	<link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+      <h1>Tappe del viaggio</h1>
+      <div th:if="${stops.isEmpty()}">Non ci sono tappe nel viaggio</div>
+      <ul>
+        <li th:each="stop : ${stops}">
+          <a th:href="@{'/stop' + '/' + ${stop.id}}"
+             th:text="${stop.name}"></a><br>
+		  <span><img width="20%" th:src=${stop.urlImage} /></span>
+        </li>
+      </ul>
+    </body>
+</html>

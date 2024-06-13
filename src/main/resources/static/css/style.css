@@ -1,0 +1,274 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Georgia, 'Times New Roman', Times, serif
+}
+
+.logo {
+	transform: translateX(80px) translateY(-30px);
+}
+
+.logoViaggi {
+	transform: translateX(-20px);
+}
+
+.sfondo {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(rgb(0,0,0,0.65), rgb(0,0,0,0.65)), url('/images/travelCollage.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    text-align: center;
+    padding-left: 8%;
+    padding-right: 8%;
+    box-sizing: border-box;
+}
+
+.navbar {
+	height: 12%;
+	display: flex;
+	align-items: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.row {
+	display: flex;
+	height: 80%;
+	align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.col {
+	flex-basis: 50%;
+}
+
+h1 {
+	color: aliceblue;
+	font-size: 100px;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+h2 {
+	color: lightblue;
+	font-size: 60px;
+	text-align: center;
+	transform: translateY(-30px);
+	text-transform: capitalize;
+}
+
+h3 {
+	color: lightblue;
+	text-transform: inherit;
+	text-transform: lowercase;
+	font-size: 50px;
+	text-align: center;
+}
+
+.titolo {
+	font-style: oblique;
+	color: lightcyan;
+	text-transform: capitalize;
+	font-size: 80px;
+}
+
+.titoloSemplice {
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-style: italic;
+	text-transform: capitalize;
+	color: lightblue;
+	font-size: 55px;
+}
+
+.scritta {
+	font-size: 60px;
+	color: lightcyan;
+}
+
+p {
+	color: aliceblue;
+	font-size: 20px;
+	line-height: 15px;
+}
+
+button {
+	background-color: transparent;
+	border: none;
+}
+
+.buttonNormal {
+    width: 240px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 5px 5px;
+    border-radius: 25px;
+    border: 2px solid lightblue;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 8px;
+    text-shadow: 0 0 10px black;
+}
+
+.buttonHP {
+    width: 150px;
+    height: 15px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 5px 5px;
+    border-radius: 25px;
+/*  background-color: lightcyan;*/
+    border: 2px solid lightcyan;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 10px;
+    transform: translateY(150px);
+    text-shadow: 0 0 10px black;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.bottoneHomepage {
+	color: lightcyan;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.bottone {
+    color: lightblue;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.card {
+	width: 200px;
+	height: 230px;
+	display: inline-block;
+	border-radius: 10px;
+	padding: 15px 25px;
+	cursor: pointer;
+	margin: 12px 30px;
+    background-position: right;
+    background-size: cover;
+    transition: transform 0.5s;
+    text-align: center;
+    align-items: center;
+}
+
+.c1 {
+	background-image: url('/images/planeWindow.png');
+}
+
+.c2 {
+	background-image: url('/images/viaggio.png');
+}
+
+.c3 {
+	background-image: url('/images/planeFoto.png');
+}
+
+.c4 {
+	background-image: url('/images/groupTrip.png');
+}
+
+.card:hover {
+	transform: translateY(-10px);
+}
+
+h5 {
+	color : lightblue;
+	text-shadow: 0 0 5px #000;
+	font-size: 15px;
+}
+
+.card p {
+	text-shadow: 0 0 5px #000;
+	font-size: 13px;
+}
+
+.content {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    padding: 20px 0;
+}
+
+span {
+	color: lightcyan;
+	font-size: 20px;
+}
+
+.leader {
+	color: lightcyan;
+	font-size: 20px;
+}
+
+div {
+	color: lightcyan;
+	font-size: 20px;
+}
+
+label {
+    display: inline-block;
+    width: 240px;
+    text-align: left;
+    margin-right: 10px;
+}
+
+input[type="text"], input[type="password"], input[type="url"], input[type="number"], input[type="date"] {
+    width: 20%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.input-field {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+a {
+    display: flex;
+    justify-content: center;
+    color: lightcyan;
+    text-decoration: none;
+    text-align: center;
+    font-size: larger;
+    margin: 5px 5px;
+}
+
+img {
+    filter: brightness(100%);
+}
+
+.foto {
+	border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    filter: brightness(100%);
+}
+
+.testo {
+	color: lightcyan;
+	font-size: 20px;
+	font-weight: lighter;
+	text-transform: initial;
+}

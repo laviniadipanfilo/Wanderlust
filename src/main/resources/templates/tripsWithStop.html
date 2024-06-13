@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Viaggi con questa tappa</title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="sfondo">
+		<div class="content">
+		    <h3>Viaggi con <span class="titoloSemplice" th:text="${stop.location}"></span></h3>
+		    <ul>
+		        <li th:each="trip : ${tripsWithStop}">
+		            <a th:href="@{'/trip/' + ${trip.id}}" th:text="${trip.name}"></a>
+					<span><img class="foto" width="10%" th:src=${trip.urlImage} /></span>
+		        </li>
+		    </ul>
+		</div>
+	</div>
+</body>
+</html>

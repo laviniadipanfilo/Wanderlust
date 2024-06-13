@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Leader</title>
+	<link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+	<div class="sfondo">
+		<div class="content">
+			<div th:if="${leader}">
+			    <h1><span th:text="${leader.name} + ' ' + ${leader.surname}"></span></h1>
+			    <div>Data di nascita: <span th:text="${leader.birthday}"></span></div>
+				<span><img class="foto" width="20%" th:src=${leader.urlImage} /></span></br>
+			    <div th:if="${leader.trips}">
+			        <ul>
+						<div th:if="${#lists.size(leader.trips) > 0}">
+							<div><strong>Viaggi organizzati da <span th:text="${leader.name} + ' ' + ${leader.surname}"></span></strong></div>
+				            <li class="card" th:each="trip : ${leader.trips}">
+				                <a th:href="@{'/trip/' + ${leader.id} + '/' + ${trip.id}}"
+				                   th:text="${trip.name}"></a><br>
+								   <span><img class="foto" width="100%" th:src=${trip.urlImage} /></span>
+				            </li>
+						</div>
+			        </ul>
+					<button type="button"><a class="bottone buttonNormal" href="/">Homepage</a></button><br>
+					<button type="button"><a class="bottone buttonNormal" href="/leaders">Leaders</a></button>
+			    </div>
+			    <div th:unless="${leader.trips}">Questo leader non ha viaggi.</div>
+				<div>
+					<form th:action="@{'/deleteLeader' + '/' + ${leader.id}}" method="post">
+					<input type="hidden" name="_method" value="delete" />
+					<button type="submit"><a class="bottone">Elimina</a></button><br>
+					</form>
+				</div>
+			</div>
+			<div th:unless="${leader}">Non esiste</div>
+		</div>
+	</div>
+  </body>
+</html>

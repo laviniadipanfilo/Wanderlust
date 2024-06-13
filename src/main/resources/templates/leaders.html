@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Leaders</title>
+	<link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+	<div class="sfondo">
+	  	<div class="content">
+	      <h2>Leaders</h2>
+	      <div th:if="${leaders.isEmpty()}">Non ci sono leaders di questo tipo nel sistema</div>
+	      <ul>
+	        <li class="card" th:each="leader : ${leaders}">
+	          <a th:href="@{'/leader' + '/' + ${leader.id}}"
+			  	 th:text="${leader.name} + ' ' + ${leader.surname}"></a>
+				 <span><img class="foto" width="80%" th:src=${leader.urlImage} /></span><br><br>
+	        </li>
+	      </ul>
+		  <button type="button"><a class="bottone buttonNormal" href="/">Homepage</a></button><br>
+		  <button type="button"><a class="bottone buttonNormal" href="/formNewLeader">Aggiungi un leader</a></button><br>
+	  	</div>
+	</div>
+  </body>
+</html>

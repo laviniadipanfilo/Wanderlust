@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nuova tappa</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="sfondo">
+		<div class="content">
+		    <h3>Aggiungi una tappa</h3>
+		    <form th:action="@{'/trip/' + ${trip.id}}" method="POST" th:object="${stop}">
+		        <div>
+		            <span th:text="${messaggioErrore}">Errore</span>
+		        </div><br>
+				
+				<div>
+					<label>Location: </label>
+					<span><input required type="text" th:field="${stop.location}"/></span>
+				</div><br>
+				
+				<div>
+					<label>Durata soggiorno: </label>
+					<span><input required type="number" th:field="${stop.days}"/></span>	
+				</div><br>
+				
+				<div>
+					<label>Numero tappa: </label>
+					<span><input required type="number" th:field="${stop.number}"/></span>	
+				</div><br>
+				
+				<div>
+					<label>URL immagine: </label>
+					<span><input type="url" th:field="${stop.urlImage}" /></span>	
+				</div><br>
+				
+				<div>
+					<label>Descrizione: </label>
+			  		<span><textarea th:field="${trip.description}" rows="4" cols="50"></textarea></span>
+				</div>
+
+		        <div>
+					<button type="submit"><a class="bottone buttonNormal">Conferma</a></button><br>
+		        </div>
+		    </form>
+		</div>
+	</div>
+</body>
+</html>
