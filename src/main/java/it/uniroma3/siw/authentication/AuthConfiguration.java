@@ -12,15 +12,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static it.uniroma3.siw.model.Credentials.ADMIN_ROLE;
+import static it.uniroma3.siw.model.Credentials.LEADER_ROLE;
 
 import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-//public  class WebSecurityConfig {
 	public class AuthConfiguration {
 
     @Autowired
@@ -34,7 +35,7 @@ import javax.sql.DataSource;
                 .authoritiesByUsernameQuery("SELECT username, role from credentials WHERE username=?")
                 .usersByUsernameQuery("SELECT username, password, 1 as enabled FROM credentials WHERE username=?");
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -45,65 +46,47 @@ import javax.sql.DataSource;
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-//    @Bean
-//    protected SecurityFilterChain configure(final HttpSecurity httpSecurity) throws Exception{
-//        httpSecurity
-//                .csrf().and().cors().disable()
-//                .authorizeHttpRequests()
-////                .requestMatchers("/**").permitAll()
-//                // chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
-//                .requestMatchers(HttpMethod.GET,"/","/index","/register","/css/**", "/images/**", "favicon.ico").permitAll()
-//        		// chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register 
-//                .requestMatchers(HttpMethod.POST,"/register", "/login").permitAll()
-//                .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
-//                .requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
-//        		// tutti gli utenti autenticati possono accere alle pagine rimanenti 
-//                .anyRequest().authenticated()
-//                // LOGIN: qui definiamo il login
-//                .and().formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//                .defaultSuccessUrl("/success", true)
-//                .failureUrl("/login?error=true")
-//                // LOGOUT: qui definiamo il logout
-//                .and()
-//                .logout()
-//                // il logout è attivato con una richiesta GET a "/logout"
-//                .logoutUrl("/logout")
-//                // in caso di successo, si viene reindirizzati alla home
-//                .logoutSuccessUrl("/")
-//                .invalidateHttpSession(true)
-//                .deleteCookies("JSESSIONID")
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .clearAuthentication(true).permitAll();
-//        return httpSecurity.build();
-//    }
-    
     @Bean
-    protected SecurityFilterChain configure(final HttpSecurity httpSecurity) throws Exception {
+    protected SecurityFilterChain configure(final HttpSecurity httpSecurity) throws Exception{
         httpSecurity
                 .csrf().and().cors().disable()
                 .authorizeHttpRequests()
-                // Permetti l'accesso a tutte le risorse senza autenticazione
-                .anyRequest().permitAll()
-                // Definizione del login
+
+                .requestMatchers(HttpMethod.GET,"/","/about" ,"/index", "/registerScelta", "/registerLeader", "/register","/css/**", "/images/**", "favicon.ico").permitAll()
+                .requestMatchers(HttpMethod.POST,"/about" ,"/registerScelta", "/registerLeader" ,"/register", "/login").permitAll()
+                .requestMatchers(HttpMethod.GET, "/leadersAdmin", "/formNewLeader", "/deleteLeaders").hasAnyAuthority(ADMIN_ROLE)
+                .requestMatchers(HttpMethod.POST, "/leader", "/deleteLeaders/{idLeader}").hasAnyAuthority(ADMIN_ROLE)
+                .requestMatchers(HttpMethod.GET, "/addImage/*", "/formNewTrip", "/addLeader/*", "/updateTrip/*", "/setLeader/**", "/formAddStop/*").hasAnyAuthority(ADMIN_ROLE, LEADER_ROLE)
+                .requestMatchers(HttpMethod.POST, "/addImage/*", "/deleteImage/**", "/trip", "/deleteTrip/*", "/updateTrip/*", "/stop/*", "/deleteStop/**").hasAnyAuthority(ADMIN_ROLE, LEADER_ROLE)
+
+                .anyRequest().authenticated()
+
                 .and().formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/success", true)
                 .failureUrl("/login?error=true")
-                // Definizione del logout
+
                 .and()
                 .logout()
+
                 .logoutUrl("/logout")
+
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .clearAuthentication(true).permitAll();
+                .clearAuthentication(true).permitAll().and()
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler());
         return httpSecurity.build();
     }
     
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            response.sendRedirect("/");
+        };
+    }
     
-
 }
